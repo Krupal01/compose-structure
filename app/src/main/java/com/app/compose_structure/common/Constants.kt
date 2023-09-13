@@ -1,6 +1,6 @@
 package com.app.compose_structure.common
 
-const val HOST_URL = "http://172.16.1.30:60000/api/"
+const val HOST_URL = ""
 const val USERNAME = "Houssam"
 const val OWNER = "ACL"
 
