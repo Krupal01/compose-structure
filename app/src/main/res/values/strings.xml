@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">ComposeBaseStructure</string>
+    <string name="title_activity_splash">SplashActivity</string>
+
+    <!--LOGIN-->
+    <string name="welcome_back">Welcome Back,</string>
+    <string name="login_to_continue">Login to continue.</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="select_owner">Select Owner</string>
+    <string name="login">Login</string>
+
+    <string name="search_owner">Search Owner</string>
+    <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
+
+    <string name="please_enter_correct_username_password">Please Enter correct username or password</string>
+    <string name="ok">OK</string>
+    <string name="please_enter_valid_username">Please enter valid username</string>
+    <string name="please_enter_valid_password">Please enter valid password</string>
+    <string name="please_select_owner">Please select owner</string>
+
+
+    <!--SETTING-->
+    <string name="setting">Setting</string>
+    <string name="user">User</string>
+    <string name="owner">Owner</string>
+    <string name="web_service_url">Web Service Url</string>
+    <string name="multi_scanning">Multi Scanning</string>
+    <string name="scandi_testing_key">Scandit Testing Key</string>
+    <string name="save">Save</string>
+    <string name="please_enter_valid_web_url">Please enter valid web service url</string>
+    <string name="please_enter_valid_owner">Please Enter valid owner</string>
+    <string name="please_check_your_internet_connection">Please check your internet connection</string>
+
+    <!-- DASHBOARD -->
+    <string name="direct_distribution">Direct Distribution</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="logout">LogOut</string>
+
+</resources>
