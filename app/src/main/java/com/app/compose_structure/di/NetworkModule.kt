@@ -1,16 +1,13 @@
 package com.app.compose_structure.di
 
-import com.app.compose_structure.common.PreferenceKey
+import com.app.compose_structure.common.HOST_URL
 import com.app.compose_structure.common.interceptor.AuthInterceptor
 import com.app.compose_structure.data.local.ISharedPreferences
 import com.app.compose_structure.data.remote.ApiService
-import com.app.compose_structure.model.UserDataModel
-import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -38,16 +35,7 @@ class NetworkModule {
         sharedPreferences: ISharedPreferences
     ): Retrofit =
         Retrofit.Builder()
-            .baseUrl(runBlocking {
-                val gson = Gson()
-                gson.fromJson(
-                    sharedPreferences.getValue(
-                        PreferenceKey.KEY_USER_SETTING, gson.toJson(
-                            UserDataModel()
-                        )
-                    ), UserDataModel::class.java
-                ).settingWebUrl
-            })
+            .baseUrl(HOST_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

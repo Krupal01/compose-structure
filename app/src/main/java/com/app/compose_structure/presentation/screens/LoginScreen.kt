@@ -3,7 +3,6 @@ package com.app.compose_structure.presentation.screens
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -20,11 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -46,22 +40,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.app.compose_structure.R
-import com.app.compose_structure.presentation.components.DropDownText
-import com.app.compose_structure.presentation.components.HeadingTextFiled
 import com.app.compose_structure.presentation.components.AppLogo
-import com.app.compose_structure.presentation.components.MultiChooseDialog
-import com.app.compose_structure.presentation.components.ProgressDialog
 import com.app.compose_structure.presentation.components.CustomDialog
+import com.app.compose_structure.presentation.components.HeadingTextFiled
+import com.app.compose_structure.presentation.components.ProgressDialog
 import com.app.compose_structure.presentation.viewmodel.LoginUIState
 import com.app.compose_structure.presentation.viewmodel.LoginViewModel
-import com.app.compose_structure.theme.DarkBlue
 import com.app.compose_structure.theme.MainTheme
 
 @Composable
 fun LoginScreenRoute(
     viewModel: LoginViewModel = hiltViewModel(),
     onBackPress: () -> Unit,
-    navigateToSettingScreen: () -> Unit,
     navigateToDashboardScreen: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -75,16 +65,13 @@ fun LoginScreenRoute(
 
     LoginScreen(
         uiState = uiState,
-        navigateToSettingScreen = navigateToSettingScreen,
         onUsernameChange = viewModel::usernameChange,
         onPasswordChange = viewModel::passwordChange,
-        onShowDialog = viewModel::changeSelectOwnerDialogState,
-        onUserNameEnter = viewModel::fetchUserOwnerList,
         onLogin = viewModel::loginUser
     )
 
     if (uiState.shouldShowDialog) {
-        MultiChooseDialog(
+        /*MultiChooseDialog(
             title = stringResource(id = R.string.select_owner),
             searchHitText = stringResource(id = R.string.search_owner),
             list = uiState.ownerNameList,
@@ -95,7 +82,7 @@ fun LoginScreenRoute(
             onCancel = {
                 viewModel.changeSelectOwnerDialogState(false)
             }
-        )
+        )*/
     }
 
     uiState.uiResMessage?.let {
@@ -124,11 +111,8 @@ fun LoginScreenRoute(
 @Composable
 fun LoginScreen(
     uiState: LoginUIState,
-    navigateToSettingScreen: () -> Unit,
     onUsernameChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
-    onShowDialog: (Boolean) -> Unit,
-    onUserNameEnter: () -> Unit,
     onLogin: () -> Unit,
 ) {
 
@@ -160,9 +144,9 @@ fun LoginScreen(
                     .padding(6.dp)
             )
 
-            IconButton(onClick = navigateToSettingScreen, modifier = Modifier.offset(x = 15.dp)) {
+            /*IconButton(onClick = navigateToSettingScreen, modifier = Modifier.offset(x = 15.dp)) {
                 Icon(imageVector = Icons.Default.Settings, contentDescription = null, tint = DarkBlue)
-            }
+            }*/
         }
 
         Spacer(modifier = Modifier.size(15.dp))
@@ -192,7 +176,6 @@ fun LoginScreen(
                     .onFocusChanged {
                         if (uiState.username.isNotEmpty() && !it.isFocused) {
                             Log.d("TAG", "LoginScreen: ${it}")
-                            onUserNameEnter()
                         }
                     }
             )
@@ -211,7 +194,7 @@ fun LoginScreen(
 
             Spacer(modifier = Modifier.size(25.dp))
 
-            DropDownText(
+            /*DropDownText(
                 headingText = stringResource(id = R.string.select_owner),
                 value = uiState.owner,
                 modifier = Modifier
@@ -220,7 +203,7 @@ fun LoginScreen(
                 textStyle = MaterialTheme.typography.labelLarge,
             )
 
-            Spacer(modifier = Modifier.size(30.dp))
+            Spacer(modifier = Modifier.size(30.dp))*/
 
             Button(
                 onClick = onLogin,
@@ -247,6 +230,6 @@ fun LoginScreen(
 @Composable
 fun LoginScreenPreview() {
     MainTheme {
-        LoginScreen(LoginUIState(), {},{}, {}, {}, {}, {})
+        LoginScreen(LoginUIState(), {}, {}, {})
     }
 }

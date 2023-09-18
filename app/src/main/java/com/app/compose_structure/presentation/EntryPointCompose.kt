@@ -23,7 +23,7 @@ fun MyBaseApp(
         MyNavHost(
             modifier = Modifier.padding(it),
             navController = appState.navController,
-            startDestination = if(isUserLoggedIn) DashboardDestination.route else LoginDestination.route,
+            startDestination = if (isUserLoggedIn) DashboardDestination.route else LoginDestination.route,
             navigateToDestination = appState::navigateToDestination,
             onBackPress = appState::onBackPress
         )

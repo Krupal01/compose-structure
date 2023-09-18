@@ -5,9 +5,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.app.compose_structure.presentation.screens.DashBoardScreenRoute
+import com.app.compose_structure.presentation.screens.DashBoardScreen
 import com.app.compose_structure.presentation.screens.LoginScreenRoute
-import com.app.compose_structure.presentation.screens.SettingScreenRoute
 
 @Composable
 fun MyNavHost(
@@ -27,12 +26,6 @@ fun MyNavHost(
         composable(LoginDestination.route) {
             LoginScreenRoute(
                 onBackPress = onBackPress,
-                navigateToSettingScreen = {
-                    navigateToDestination(
-                        SettingDestination,
-                        SettingDestination.route
-                    )
-                },
                 navigateToDashboardScreen = {
                     navigateToDestination(
                         DashboardDestination,
@@ -42,28 +35,11 @@ fun MyNavHost(
             )
         }
 
-        composable(SettingDestination.route) {
-            SettingScreenRoute(onBackPress = onBackPress)
-        }
-
         composable(DashboardDestination.route) {
-            DashBoardScreenRoute(
-                onBackPress = onBackPress,
-                navigateToReceptionOptionScreen = { /*TODO*/ },
-                navigateToReceptionScreen = { /*TODO*/ },
-                navigateToPutAwayScreen = { /*TODO*/ },
-                navigateToExpeditionScreen = { /*TODO*/ },
-                navigateToShippingScreen = { /*TODO*/ },
-                navigateToReturnScreen = { /*TODO*/ },
-                navigateToLocationTransferScreen = { /*TODO*/ },
-                navigateToInventoryScreen = {},
-                navigateToLoginScreen = {
-                    navigateToDestination(
-                        LoginDestination,
-                        LoginDestination.route
-                    )
-                }
+            DashBoardScreen(
+
             )
         }
+
     }
 }

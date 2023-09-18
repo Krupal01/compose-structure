@@ -3,10 +3,10 @@ package com.app.compose_structure.common.interceptor
 import com.app.compose_structure.common.APPLICATION_JSON
 import com.app.compose_structure.common.AUTHORIZATION
 import com.app.compose_structure.common.CONTENT_TYPE
+import com.app.compose_structure.common.HOST_URL
 import com.app.compose_structure.common.PreferenceKey
 import com.app.compose_structure.common.extentions.toBase64Encode
 import com.app.compose_structure.data.local.ISharedPreferences
-import com.app.compose_structure.model.UserDataModel
 import com.google.gson.Gson
 import kotlinx.coroutines.runBlocking
 import okhttp3.HttpUrl
@@ -19,28 +19,27 @@ class AuthInterceptor(private val sharedPreferences: ISharedPreferences) : Inter
 
     private val gson = Gson()
 
-    private var defaultObj: String = gson.toJson(UserDataModel())
+    private var defaultObj: String = ""
 
     /**
      * Interceptor class for setting of the headers for every request
      */
     override fun intercept(chain: Interceptor.Chain): Response {
 
-        val userSetting = runBlocking {
-            gson.fromJson(
-                sharedPreferences.getValue(
-                    PreferenceKey.KEY_USER_SETTING,
-                    defaultObj
-                ), UserDataModel::class.java
+        val token = runBlocking {
+
+            sharedPreferences.getValue(
+                PreferenceKey.TOKEN,
+                defaultObj
             )
+
         }
 
-        val token = userSetting.settingUsername
 
         var httpNewUrl: HttpUrl? = null
 
         val newUrl = try {
-            val url: String = userSetting.settingWebUrl
+            val url: String = HOST_URL
 
             httpNewUrl = url.toHttpUrl()
 

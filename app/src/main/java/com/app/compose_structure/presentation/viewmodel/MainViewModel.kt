@@ -11,6 +11,6 @@ class MainViewModel @Inject constructor(
     private val userRepository: IUserRepository
 ) : ViewModel() {
 
-    fun isUserLogin() = runBlocking { userRepository.getUserSetting().username.isNotEmpty() }
+    fun isUserLogin() = runBlocking { userRepository.isLogin() }
 
 }
