@@ -37,5 +37,6 @@
     <string name="direct_distribution">Direct Distribution</string>
     <string name="dashboard">Dashboard</string>
     <string name="logout">LogOut</string>
+    <string name="no_refresh_for_page_s">No refresh for page %s</string>
 
 </resources>

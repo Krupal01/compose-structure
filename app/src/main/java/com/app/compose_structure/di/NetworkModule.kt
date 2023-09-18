@@ -22,7 +22,7 @@ class NetworkModule {
     @Provides
     fun provideOkHttpClient(sharedPreferences: ISharedPreferences): OkHttpClient =
         OkHttpClient().newBuilder()
-            .addInterceptor(AuthInterceptor(sharedPreferences))
+            /*.addInterceptor(AuthInterceptor(sharedPreferences))*/
             .addNetworkInterceptor(HttpLoggingInterceptor().apply {
                 setLevel(HttpLoggingInterceptor.Level.BODY)
             })

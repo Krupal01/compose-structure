@@ -10,7 +10,15 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val userRepository: IUserRepository
 ) : ViewModel() {
-
     fun isUserLogin() = runBlocking { userRepository.isLogin() }
 
 }
+
+data class UiMessage(
+    val message: String? = null,
+    val resMessage: Int? = null,
+    val params: Array<String>? = null,
+    val uiAction: (() -> Unit)? = null,
+    val uiDismissAction: (() -> Unit)? = null,
+    val uiActionCancel: (() -> Unit)? = null
+)

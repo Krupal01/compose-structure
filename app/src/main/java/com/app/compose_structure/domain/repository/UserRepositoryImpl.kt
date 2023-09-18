@@ -5,6 +5,7 @@ import com.app.compose_structure.common.Result
 import com.app.compose_structure.data.local.ISharedPreferences
 import com.app.compose_structure.data.remote.IBaseRemoteService
 import com.app.compose_structure.data.remote.model.ResLogin
+import com.app.compose_structure.data.remote.model.ResUserList
 import com.app.compose_structure.di.IoDispatcher
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineDispatcher
@@ -44,4 +45,7 @@ class UserRepositoryImpl @Inject constructor(
         return data.isNotEmpty()
     }
 
+    override suspend fun getUserList(page: Int): Result<ResUserList?> = withContext(dispatcher) {
+        remoteDataSource.getUserList(page)
+    }
 }

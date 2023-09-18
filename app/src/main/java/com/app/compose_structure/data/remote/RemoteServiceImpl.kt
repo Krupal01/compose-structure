@@ -6,6 +6,7 @@ import com.app.compose_structure.common.Result
 import com.app.compose_structure.data.remote.model.ApiErrorModel
 import com.app.compose_structure.data.remote.model.BaseApiErrorModel
 import com.app.compose_structure.data.remote.model.ResLogin
+import com.app.compose_structure.data.remote.model.ResUserList
 import com.app.compose_structure.data.remote.request.ReqLogin
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -68,6 +69,22 @@ class RemoteServiceImpl @Inject constructor(
             )
         }
         return if (result is Result.Success) {
+            if (result.data != null)
+                Result.Success(result.data)
+            else
+                Result.Error((result as Result.Error).exception)
+        } else {
+            Result.Error((result as Result.Error).exception)
+        }
+    }
+
+    override suspend fun getUserList(page: Int): Result<ResUserList?> {
+        val result = apiRequest {
+            api.getUserList(
+                page
+            )
+        }
+        return if(result is Result.Success){
             if (result.data != null)
                 Result.Success(result.data)
             else
