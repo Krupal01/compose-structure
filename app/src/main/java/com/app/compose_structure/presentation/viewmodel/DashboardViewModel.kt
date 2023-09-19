@@ -1,5 +1,6 @@
 package com.app.compose_structure.presentation.viewmodel
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -15,18 +16,27 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.random.Random
 
 @HiltViewModel
 class DashboardViewModel @Inject constructor(
-    val userRepository: IUserRepository
+    private val userRepository: IUserRepository,
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(DashboardUiState())
     val uiState = _uiState.asStateFlow()
 
+    val color = savedStateHandle.getStateFlow("color" , 0xFFFFFF)
+
 
     init {
         getUserList()
+    }
+
+
+    fun changeColor(){
+        savedStateHandle["color"] = Random.nextLong(0xFFFFFFFF)
     }
 
     fun getUserList(){
