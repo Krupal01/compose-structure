@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -26,6 +27,7 @@ fun TopBar(
     onBackPressed: () -> Unit = {},
     isBackButton: Boolean = false,
     actions: @Composable RowScope.() -> Unit = {},
+    textColor : Color = DarkBlue
 ) {
     Surface(shadowElevation = 3.dp) {
         TopAppBar(
@@ -34,7 +36,7 @@ fun TopBar(
                 Text(
                     text = title,
                     style = TextStyle(
-                        color = DarkBlue,
+                        color = textColor,
                         fontWeight = FontWeight.Bold,
                         fontSize = 22.sp
                     ),

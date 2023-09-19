@@ -40,11 +40,23 @@ fun DashBoardScreen(
     val uiState by viewModel.uiState.collectAsState()
 
     Column {
-        TopBar(title = "Dashboard" , actions = {
+        TopBar(
+            textColor = Color(viewModel.actionColor),
+            title = "Dashboard" ,
+            actions = {
             IconButton(onClick = {
                 viewModel.showDialog()
-//                viewModel.getUserList()
+                viewModel.getUserList()
+            }) {
+                Icon(imageVector = Icons.Filled.Refresh, contentDescription = null)
+            }
+            IconButton(onClick = {
                 viewModel.changeColor()
+            }) {
+                Icon(imageVector = Icons.Filled.Refresh, contentDescription = null)
+            }
+            IconButton(onClick = {
+                viewModel.changeActionColor()
             }) {
                 Icon(imageVector = Icons.Filled.Refresh, contentDescription = null)
             }

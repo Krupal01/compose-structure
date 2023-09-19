@@ -1,5 +1,8 @@
 package com.app.compose_structure.presentation.viewmodel
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -29,11 +32,16 @@ class DashboardViewModel @Inject constructor(
 
     val color = savedStateHandle.getStateFlow("color" , 0xFFFFFF)
 
+    var actionColor by mutableStateOf(0xFFFFFFFF)
+        private set
 
     init {
         getUserList()
     }
 
+    fun changeActionColor(){
+        actionColor = Random.nextLong(0xFFFFFFFF)
+    }
 
     fun changeColor(){
         savedStateHandle["color"] = Random.nextLong(0xFFFFFFFF)
