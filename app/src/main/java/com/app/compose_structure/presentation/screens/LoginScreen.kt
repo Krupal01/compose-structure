@@ -1,6 +1,8 @@
 package com.app.compose_structure.presentation.screens
 
+import android.Manifest
 import android.util.Log
+import androidx.activity.result.ActivityResultCaller
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -25,10 +27,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -39,7 +43,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.app.compose_structure.R
+import com.app.compose_structure.common.utils.PermissionUtils
 import com.app.compose_structure.presentation.components.AppLogo
 import com.app.compose_structure.presentation.components.CustomDialog
 import com.app.compose_structure.presentation.components.HeadingTextFiled
@@ -58,7 +64,6 @@ fun LoginScreenRoute(
 
     LaunchedEffect(key1 = uiState.isLoginSuccess, block = {
         if (uiState.isLoginSuccess) {
-            // Redirect Dashboard Screen
             navigateToDashboardScreen()
         }
     })

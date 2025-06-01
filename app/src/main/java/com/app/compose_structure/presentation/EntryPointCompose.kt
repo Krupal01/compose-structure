@@ -17,7 +17,6 @@ fun MyBaseApp(
     appState: MyAppState = rememberAppState(),
     isUserLoggedIn: Boolean
 ) {
-
     // Entry point
     Scaffold {
         MyNavHost(

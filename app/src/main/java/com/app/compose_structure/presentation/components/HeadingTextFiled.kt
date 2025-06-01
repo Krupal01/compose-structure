@@ -40,9 +40,10 @@ fun HeadingTextFiled(
     contentPadding: PaddingValues = PaddingValues(top = 6.dp,bottom = 6.dp),
     textStyle: TextStyle = TextStyle.Default,
     shape: Shape = TextFieldDefaults.outlinedShape,
-    color: TextFieldColors = TextFieldDefaults.textFieldColors(
-        containerColor = Color.Transparent,
-        unfocusedIndicatorColor = TextFiledTintColor,
+    color: TextFieldColors = TextFieldDefaults.colors(
+        focusedContainerColor = Color.Transparent,
+        unfocusedContainerColor = Color.Transparent,
+         unfocusedIndicatorColor = TextFiledTintColor,
     ),
     visualTransformation: VisualTransformation = VisualTransformation.None,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -65,7 +66,7 @@ fun HeadingTextFiled(
             maxLines = maxLines,
             minLines = minLines,
         ) {
-            TextFieldDefaults.TextFieldDecorationBox(
+            TextFieldDefaults.DecorationBox(
                 value = value,
                 innerTextField = it,
                 singleLine = singleLine,

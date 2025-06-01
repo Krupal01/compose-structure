@@ -107,7 +107,7 @@ fun MultiChooseDialog (
                     singleLine = true,
                     textStyle = MaterialTheme.typography.titleMedium,
                 ) {
-                    TextFieldDefaults.TextFieldDecorationBox(
+                    TextFieldDefaults.DecorationBox(
                         value = searchText,
                         innerTextField = it,
                         enabled = true,
@@ -122,8 +122,9 @@ fun MultiChooseDialog (
                         shape = RoundedCornerShape(12.dp),
                         visualTransformation = VisualTransformation.None,
                         interactionSource = interactionSource,
-                        colors = TextFieldDefaults.textFieldColors(
-                            containerColor = GrayColor,
+                        colors = TextFieldDefaults.colors(
+                            focusedContainerColor = GrayColor,
+                            unfocusedContainerColor = GrayColor,
                             unfocusedIndicatorColor = GrayColor,
                             focusedIndicatorColor = GrayColor
                         ),
