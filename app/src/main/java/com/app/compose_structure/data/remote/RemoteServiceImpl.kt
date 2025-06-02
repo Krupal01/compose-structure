@@ -68,14 +68,14 @@ class RemoteServiceImpl @Inject constructor(
                 )
             )
         }
-        return if (result is Result.Success) {
+        return Result.Success(ResLogin())/*if (result is Result.Success) {
             if (result.data != null)
                 Result.Success(result.data)
             else
                 Result.Error((result as Result.Error).exception)
         } else {
             Result.Error((result as Result.Error).exception)
-        }
+        }*/
     }
 
     override suspend fun getUserList(page: Int): Result<ResUserList?> {

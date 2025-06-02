@@ -1,6 +1,7 @@
 package com.app.compose_structure.presentation.screens
 
 import android.Manifest
+import android.os.Build
 import android.util.Log
 import androidx.activity.result.ActivityResultCaller
 import androidx.compose.foundation.Image
@@ -27,7 +28,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
@@ -45,6 +49,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.app.compose_structure.R
+import com.app.compose_structure.common.utils.PermissionDialog
+import com.app.compose_structure.common.utils.PermissionHandler
 import com.app.compose_structure.common.utils.PermissionUtils
 import com.app.compose_structure.presentation.components.AppLogo
 import com.app.compose_structure.presentation.components.CustomDialog
@@ -67,6 +73,55 @@ fun LoginScreenRoute(
             navigateToDashboardScreen()
         }
     })
+
+    val context = LocalContext.current
+    var showRationaleDialog by remember { mutableStateOf(false) }
+    val deniedPermissions = remember { mutableStateListOf<String>() }
+
+    PermissionHandler(
+        permissions = when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> {
+                listOf(
+                    Manifest.permission.READ_MEDIA_VIDEO,
+                    Manifest.permission.READ_MEDIA_IMAGES
+                )
+            }
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1 -> {
+                listOf(
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+            }
+            else -> {
+                emptyList()
+            }
+        },
+        onDenied = {
+
+        },
+        onGranted = {
+
+        },
+        onPermanentlyDenied = {
+            showRationaleDialog = true
+            deniedPermissions.clear()
+            deniedPermissions.addAll(it)
+        }
+    )
+
+    if(showRationaleDialog){
+        PermissionDialog(
+            title = "Permission Required",
+            permissions = deniedPermissions,
+            message = "These permissions are required to proceed:",
+            confirmText = "Retry",
+            onConfirm = {
+                showRationaleDialog = false
+                PermissionUtils.openAppSettings(context = context)
+            },
+            onDismiss = { showRationaleDialog = false }
+        )
+    }
 
     LoginScreen(
         uiState = uiState,

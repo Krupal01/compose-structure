@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
 
         val isUserLoggedIn = viewModel.isUserLogin()
 
-        val permissionUtils = PermissionUtils(this)
+        /*val permissionUtils = PermissionUtils(this)
         permissionUtils.checkAndRequestPermissions(
             context = this,
             permissions = when {
@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
                 // At least one permission permanently denied
                 PermissionUtils.openAppSettings(this)
             }
-        )
+        )*/
 
         setContent {
             MainTheme {
